@@ -5,9 +5,9 @@ FROM debian:wheezy
 MAINTAINER mark <norrkin@icloud.com>
 
 # define what release we want to use
-ENV sonarr_release 2.0.0.4230
+ENV sonarr_release 2.0.0.4326
 
-# get Sonarr & its dependencies
+# get sonarr & its dependencies
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
   echo "deb http://download.mono-project.com/repo/debian wheezy main" | tee /etc/apt/sources.list.d/mono-xamarin.list && \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
@@ -18,12 +18,12 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-# Match user id running on host
+# match user id with host
 RUN useradd -M -u 1030 -g 100 nzbdrone -s /bin/sh
 
 # adding nzbdrone startup script
 ADD start.sh /
-# and setting execute permissions
+# and set execute permissions
 RUN chmod +x /start.sh && chown nzbdrone:users /start.sh
 
 # set more permissions

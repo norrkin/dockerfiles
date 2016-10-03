@@ -3,11 +3,11 @@
 #### Sonarr container using Debian Wheezy.
 * *To-do;* need to look into using Alpine, debian image is rather big in size due to mono.
 
-Commands to build & deploy an Sonarr container using Docker.
+Commands to build & deploy an [Sonarr](https://sonarr.tv) container using Docker.
 
 *Build image;*
 
-    $ sudo docker build --no-cache=true  -t sonarr .
+    $ sudo docker build --no-cache=true -t sonarr .
 
 *Run container;*
 
