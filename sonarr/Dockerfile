@@ -1,15 +1,17 @@
 # Base image to be used
-FROM debian:wheezy
+FROM debian:jessie
 
 # Tweaked by me
 MAINTAINER mark <norrkin@icloud.com>
 
-# define what release we want to use
-ENV sonarr_release 2.0.0.4230
+# Define what release we want to use
+ENV sonarr_release 2.0.0.4326
 
-# get sonarr & its dependencies
+# Get sonarr & its dependencies
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
   echo "deb http://download.mono-project.com/repo/debian wheezy main" | tee /etc/apt/sources.list.d/mono-xamarin.list && \
+  echo "deb http://download.mono-project.com/repo/debian wheezy-libjpeg62-compat main" | tee -a /etc/apt/sources.list.d/mono-xamarin.list && \
+
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
   echo "deb http://apt.sonarr.tv/ master main" | tee -a /etc/apt/sources.list && \
   apt-get update -q && \
@@ -17,19 +19,21 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
   apt-get clean && apt-get autoremove && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
-# match user id with host
+# Match user id with host
 RUN useradd -M -u 1030 -g 100 nzbdrone -s /bin/sh
 
-# adding nzbdrone startup script
+# Adding nzbdrone startup script
 ADD start.sh /
-# and set execute permissions
+# And set execute permissions
 RUN chmod +x /start.sh && chown nzbdrone:users /start.sh
 
-# set more permissions
+# Set more permissions
 RUN chown -R nzbdrone:users /opt/NzbDrone
+# Sets working directory
 WORKDIR /opt/NzbDrone
 
+# Open sonarr port
 EXPOSE 8989
 
+# Start sonarr
 CMD ["/start.sh"]
