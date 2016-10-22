@@ -8,6 +8,9 @@ MAINTAINER mark <norrkin@icloud.com>
 ENV SABNZBD_VERSION 1.1.0
 ENV PAR2CMDLINE_VERSION v0.6.14
 
+# Create user and group for SABnzbd
+RUN groupadd -o -g 100 sabnzbd && useradd -o -M -u 100 -g 100 -d /sabnzbd sabnzbd
+
 # Install dependencies
 RUN sed -i "s/ main$/ main contrib non-free/" /etc/apt/sources.list && \
     apt-get update -q && \
@@ -30,11 +33,6 @@ RUN curl -o /tmp/sabnzbd.tar.gz https://codeload.github.com/sabnzbd/sabnzbd/tar.
     apt-get -y remove curl build-essential automake && \
     apt-get -y autoremove && apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Create user and group for SABnzbd
-RUN groupadd -o -g 100 sabnzbd && useradd -o -M -u 100 -g 100 -d /sabnzbd sabnzbd
-# Set user
-USER sabnzbd
 
 # Add SABnzbd init script
 ADD sabnzbd.sh /sabnzbd.sh
