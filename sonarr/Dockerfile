@@ -5,7 +5,7 @@ FROM debian:jessie
 MAINTAINER mark <norrkin@icloud.com>
 
 # Define what release we want to use
-ENV sonarr_release 2.0.0.4326
+ENV sonarr_release 2.0.0.4374
 
 # Get sonarr & its dependencies
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
@@ -16,7 +16,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
   echo "deb http://apt.sonarr.tv/ master main" | tee -a /etc/apt/sources.list && \
   apt-get update -q && \
   apt-get install -qy mono-devel nzbdrone=${sonarr_release} mediainfo --no-install-recommends && \
-  apt-get clean && apt-get autoremove && \
+  apt-get autoremove && apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Match user id with host
@@ -29,7 +29,7 @@ RUN chmod +x /start.sh && chown nzbdrone:users /start.sh
 
 # Set more permissions
 RUN chown -R nzbdrone:users /opt/NzbDrone
-# Sets working directory
+# Set working directory
 WORKDIR /opt/NzbDrone
 
 # Open sonarr port
