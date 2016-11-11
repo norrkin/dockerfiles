@@ -10,6 +10,7 @@ ENV config=/opt/openvpn/openvpn.conf
 
 # copy start script
 COPY startopenvpn.sh /usr/local/bin/startopenvpn.sh
+RUN chmod +x /usr/local/bin/startopenvpn.sh
 
 # Install openvpn and dependencies
 RUN apk add --update bash openvpn openssl && \
