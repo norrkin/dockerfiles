@@ -5,7 +5,7 @@ FROM debian:jessie
 MAINTAINER mark <norrkin@icloud.com>
 
 # Define what release we want
-ENV SABNZBD_VERSION 1.1.0
+ENV SABNZBD_VERSION 1.1.1
 ENV PAR2CMDLINE_VERSION v0.6.14
 
 # Create user and group for SABnzbd
