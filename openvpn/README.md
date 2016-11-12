@@ -15,3 +15,9 @@ Commands to build & deploy an OpenVPN docker container
 *Attach to container shell;*
 
     $ sudo docker exec -it openvpn /bin/sh
+
+\**Tun Module;*
+
+The tun module needs to be loaded to allow OpenVPN to create an TUN/TAP device (tun0).  Run tun.sh to load the tun module on the Synology nas before starting container.  This can be done via a scheduled task.
+
+    $ sh /path/to/tun.sh

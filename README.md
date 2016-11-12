@@ -1,3 +1,3 @@
-## My dockerfiles
+## dockerfiles
 
-*My lovely dockerfiles used to create docker containers deployed to my Synology DS415+ nas*
+*Repo for the various dockerfiles used to create images/containers deployed to my Synology DS415+ nas*
