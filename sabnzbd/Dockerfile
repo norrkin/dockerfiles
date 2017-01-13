@@ -4,7 +4,7 @@ FROM debian:jessie
 # Tweaked by me
 MAINTAINER mark <norrkin@icloud.com>
 
-# Define what release we want
+# Define what release we want to use
 ENV SABNZBD_VERSION 1.2.0
 ENV PAR2CMDLINE_VERSION v0.6.14
 
