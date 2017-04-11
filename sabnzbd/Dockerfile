@@ -6,24 +6,26 @@ MAINTAINER mark <norrkin@icloud.com>
 
 # Define what release we want to use
 ENV SABNZBD_VERSION 2.0.0
-ENV PAR2CMDLINE_VERSION v0.6.14
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 # Create user and group for SABnzbd
 RUN groupadd -o -g 100 sabnzbd && useradd -o -M -u 100 -g 100 -d /sabnzbd sabnzbd
 
 # Install dependencies
 RUN sed -i "s/ main$/ main contrib non-free/" /etc/apt/sources.list && \
+    echo "deb http://ppa.launchpad.net/jcfp/sab-addons/ubuntu xenial main" >> /etc/apt/sources.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F13930B14BB9F05F && \
     apt-get update -q && \
-    apt-get install -qy curl ca-certificates python-cheetah python-openssl python-yenc unzip unrar p7zip-full build-essential automake
+    apt-get install -qy curl ca-certificates python-cheetah python-openssl python-sabyenc libgomp1 git unzip unrar p7zip-full build-essential automake
 
-# Build SABnzbd
+# Build SABnzbd & par2cmdline (multithreaded)
 RUN curl -o /tmp/sabnzbd.tar.gz https://codeload.github.com/sabnzbd/sabnzbd/tar.gz/${SABNZBD_VERSION} && \
     tar xzf /tmp/sabnzbd.tar.gz && \
     mv sabnzbd-* sabnzbd && \
     chown -R sabnzbd: sabnzbd && \
-    curl -o /tmp/par2cmdline.tar.gz https://codeload.github.com/Parchive/par2cmdline/tar.gz/${PAR2CMDLINE_VERSION} && \
-    tar xzf /tmp/par2cmdline.tar.gz -C /tmp && \
-    cd /tmp/par2cmdline-* && \
+    git clone https://github.com/jkansanen/par2cmdline-mt.git /tmp/par2cmdline-mt && \
+    cd /tmp/par2cmdline-mt && \
     aclocal && \
     automake --add-missing && \
     autoconf && \
