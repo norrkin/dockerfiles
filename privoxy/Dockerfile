@@ -2,7 +2,7 @@
 FROM alpine:latest
 
 # Tweaked by me
-MAINTAINER mark <norrkin@icloud.com>
+LABEL maintainer "mark <norrkin@icloud.com>"
 
 # Install privoxy
 RUN apk update && apk --no-cache add \

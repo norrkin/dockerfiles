@@ -1,19 +1,28 @@
 # Base image to be used
-FROM alpine:latest
+FROM alpine:edge
 
 # Tweaked by me
-MAINTAINER mark <norrkin@icloud.com>
+LABEL maintainer "mark <norrkin@icloud.com>"
 
-# Get tor from alpine testing repo
-RUN apk --no-cache add --repository http://dl-4.alpinelinux.org/alpine/edge/community/ tor && \
-	rm -rf /var/cache/apk/* && \
-	rm -rf /tmp/*
+# Get dependicies 
+RUN apk update && apk add \
+    --repository http://dl-cdn.alpinelinux.org/alpine/edge/main/ \
+    libressl2.4-libcrypto \
+    libressl2.4-libssl \
+    libevent && \
+# Get tor
+    apk --no-cache add \
+	--repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ tor && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/* && \
+    # Set permissions
+    chown -R tor /etc/tor
 
 # Copy tor config
 COPY torrc.default /etc/tor/torrc.default
 
-# Set permissions
-RUN chown -R tor /etc/tor
+# set user
+USER tor
 
 # Open port
 EXPOSE 9050
