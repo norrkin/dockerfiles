@@ -1,5 +1,5 @@
 # Base image to be used
-FROM alpine:latest
+FROM alpine:3.6
 
 # Tweaked by me
 LABEL maintainer "mark <norrkin@icloud.com>"
@@ -14,9 +14,8 @@ COPY startopenvpn.sh /usr/local/bin/startopenvpn.sh
 # set permissions
 RUN chmod +x /usr/local/bin/startopenvpn.sh && \
 # Install openvpn and dependencies
-	apk add --update bash openvpn openssl && \
-	rm -rf /var/cache/apk/* && \
-	rm -rf /tmp/* && \
+	apk update && apk add openvpn openssl && \
+	rm -rf /var/cache/apk/* && rm -rf /tmp/* && \
 # Create mount point
 	mkdir -p ${openvpn} && \
 # Output logging to stdout
