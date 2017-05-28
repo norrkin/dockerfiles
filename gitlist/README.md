@@ -8,8 +8,8 @@ Reference - [gitlist.org](http://gitlist.org)
 
     $ sudo docker build -t gitlist .
 
-    $ sudo docker run --name gitlist -v /volume1/repo/:/volume1/repo/ -p 8054:80 -d gitlist
+    $ sudo docker run --name gitlist -v /volume1/repo/:/repo/ -p 8054:80 -d gitlist
 
 *Attach to container;*
 
-    $ sudo docker exec -it gitlist bash
+    $ sudo docker exec -it gitlist /bin/sh
