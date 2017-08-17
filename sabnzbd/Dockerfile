@@ -5,7 +5,7 @@ FROM debian:jessie
 LABEL maintainer "mark <norrkin@icloud.com>"
 
 # Define what release we want to use
-ENV SABNZBD_VERSION 2.1.0
+ENV SABNZBD_VERSION 2.2.0
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
