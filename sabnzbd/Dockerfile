@@ -37,8 +37,8 @@ RUN chmod 755 /sabnzbd.sh && \
     apt-get -y autoremove && apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Define container settings
-VOLUME ["/datadir", "/download"]
+# Mount volumes
+VOLUME ["/datadir", "/downloads"]
 
 # Set working directory
 WORKDIR /sabnzbd
