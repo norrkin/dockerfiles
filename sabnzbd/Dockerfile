@@ -38,7 +38,7 @@ RUN chmod 755 /sabnzbd.sh && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Mount volumes
-VOLUME ["/datadir", "/downloads"]
+VOLUME ["/datadir", "/download"]
 
 # Set working directory
 WORKDIR /sabnzbd

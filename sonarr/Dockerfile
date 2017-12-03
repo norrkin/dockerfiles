@@ -24,7 +24,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
     chown -R nzbdrone:users /opt/NzbDrone
 
 # Mount volumes
-VOLUME ["/config", "/downloads"]
+VOLUME ["/config", "/download"]
 
 # Set working directory
 WORKDIR /opt/NzbDrone

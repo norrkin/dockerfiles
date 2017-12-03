@@ -33,7 +33,7 @@ echo "[DONE]"
 printf "Set permissions... "
 touch ${CONFIG}
 chown -R ${USER}: /sabnzbd
-chown ${USER}: /datadir /downloads $(dirname ${CONFIG})
+chown ${USER}: /datadir /download $(dirname ${CONFIG})
 echo "[DONE]"
 
 #

@@ -13,7 +13,7 @@ Commands to build & deploy an [Sonarr](https://sonarr.tv) container using Docker
 
 \*Following command sets max memory and links to an exisiting SABnzbd instance.
 
-    $ sudo docker run -tid -m 256m --name sonarr --link sabnzbd:sabnzbd -p 8989:8989 -v /volume1/downloads/Sonarr/config:/config -v /volume1/downloads:/volume1/downloads -v /volume1/media/video/tv:/volume1/media/video/tv -e PUID=1030 -e PGID=100 sonarr
+    $ sudo docker run -tid -m 256m --name sonarr --link sabnzbd:sabnzbd -p 8989:8989 -v /volume1/downloads/Sonarr/config:/config -v /volume1/downloads/SABnzbd:/download -v /volume1/media/video/tv:/volume1/media/video/tv -e PUID=1030 -e PGID=100 sonarr
 
 *Attach to container;*
 
