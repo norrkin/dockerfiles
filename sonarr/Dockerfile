@@ -5,7 +5,7 @@ FROM debian:jessie
 LABEL maintainer "mark <norrkin@icloud.com>"
 
 # Define what release we want to use
-ENV sonarr_release 2.0.0.5054
+ENV sonarr_release 2.0.0.5085
 
 # Adding nzbdrone startup script
 ADD start.sh /
