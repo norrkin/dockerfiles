@@ -5,10 +5,10 @@ FROM debian:jessie
 LABEL maintainer "mark <norrkin@icloud.com>"
 
 # Define what release we want to use
-ENV SABNZBD_VERSION 2.3.1
+ENV SABNZBD_VERSION 2.3.2
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV SABYENC_VERSION=3.3.1
+ENV SABYENC_VERSION=3.3.2
 ENV CHEETAH_VERSION=2.4.4
 
 # adding startup script
@@ -19,7 +19,7 @@ RUN chmod 755 /sabnzbd.sh && \
     groupadd -o -g 100 sabnzbd && useradd -o -M -u 100 -g 100 -d /sabnzbd sabnzbd && \
     sed -i "s/ main$/ main contrib non-free/" /etc/apt/sources.list && \
     apt-get update -q && \
-    apt-get install -qy curl ca-certificates libgomp1 git unzip unrar python-dev python-pip p7zip-full build-essential automake && \
+    apt-get install -qy curl ca-certificates libgomp1 git unzip unrar p7zip-rar python-dev python-pip p7zip-full build-essential automake && \
     pip install sabyenc==${SABYENC_VERSION} cheetah==${CHEETAH_VERSION} && \
     curl -o /tmp/sabnzbd.tar.gz https://codeload.github.com/sabnzbd/sabnzbd/tar.gz/${SABNZBD_VERSION} && \
     tar xzf /tmp/sabnzbd.tar.gz && \
