@@ -1,4 +1,19 @@
 #!/bin/sh
+#
+# entrypoint.sh
+
+
+# create user
+printf "Create nzbdrone user/group... "
+useradd -M -u ${UID} -g ${GID} nzbdrone -s /bin/sh && \
+echo "[DONE]"
+
+
+# set some permissions
+printf "Set permissions... "
+chown -R nzbdrone:users /opt/NzbDrone
+echo "[DONE]"
+
 
 handle_signal() {
   PID=$!
