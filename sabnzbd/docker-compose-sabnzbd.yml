@@ -1,0 +1,19 @@
+# docker-compose -f docker-compose-sabnzbd.yml up -d --build
+
+version: '2.3'
+
+services:
+
+  bukka:
+    build: .
+    image: sabnzbd
+    ports:
+      - "9090:8080"
+    volumes:
+      - /volume1/downloads/SABnzbd/config:/datadir
+      - /volume1/downloads/SABnzbd:/download
+    environment:
+      - UID=100
+      - GID=100
+    container_name: sabnzbd
+    restart: always

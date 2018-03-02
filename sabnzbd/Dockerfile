@@ -1,5 +1,5 @@
 # Base image to be used
-FROM debian:jessie
+FROM debian:stretch
 
 # Tweaked by me
 LABEL maintainer "mark <norrkin@icloud.com>"
@@ -12,11 +12,10 @@ ENV SABYENC_VERSION=3.3.2
 ENV CHEETAH_VERSION=2.4.4
 
 # adding startup script
-ADD sabnzbd.sh /sabnzbd.sh
+COPY entrypoint.sh /usr/bin/entrypoint.sh
 
 # Set permissions, create SAB user and group, install dependencies, Build SABnzbd & par2cmdline (multithreaded)
-RUN chmod 755 /sabnzbd.sh && \
-    groupadd -o -g 100 sabnzbd && useradd -o -M -u 100 -g 100 -d /sabnzbd sabnzbd && \
+RUN chmod 755 /usr/bin/entrypoint.sh && \
     sed -i "s/ main$/ main contrib non-free/" /etc/apt/sources.list && \
     apt-get update -q && \
     apt-get install -qy curl ca-certificates libgomp1 git unzip unrar p7zip-rar python-dev python-pip p7zip-full build-essential automake && \
@@ -24,7 +23,6 @@ RUN chmod 755 /sabnzbd.sh && \
     curl -o /tmp/sabnzbd.tar.gz https://codeload.github.com/sabnzbd/sabnzbd/tar.gz/${SABNZBD_VERSION} && \
     tar xzf /tmp/sabnzbd.tar.gz && \
     mv sabnzbd-* sabnzbd && \
-    chown -R sabnzbd: sabnzbd && \
     git clone https://github.com/jkansanen/par2cmdline-mt.git /tmp/par2cmdline-mt && \
     cd /tmp/par2cmdline-mt && \
     aclocal && \
@@ -47,4 +45,4 @@ WORKDIR /sabnzbd
 EXPOSE 8080
 
 # Start SABnzbd
-CMD ["/sabnzbd.sh"]
+CMD ["/usr/bin/entrypoint.sh"]
