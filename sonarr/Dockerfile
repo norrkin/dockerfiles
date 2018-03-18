@@ -5,7 +5,7 @@ FROM debian:stretch
 LABEL maintainer "mark <norrkin@icloud.com>"
 
 # Define what release we want to use
-ENV sonarr_release 2.0.0.5153
+ENV sonarr_release 2.0.0.5163
 
 
 # Adding nzbdrone startup script
