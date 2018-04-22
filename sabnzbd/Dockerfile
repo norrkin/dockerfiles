@@ -5,10 +5,10 @@ FROM debian:stretch
 LABEL maintainer "mark <norrkin@icloud.com>"
 
 # Define what release we want to use
-ENV SABNZBD_VERSION 2.3.2
+ENV SABNZBD_VERSION 2.3.3
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV SABYENC_VERSION=3.3.2
+ENV SABYENC_VERSION=3.3.5
 ENV CHEETAH_VERSION=2.4.4
 
 # adding startup script
